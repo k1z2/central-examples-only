@@ -8,8 +8,9 @@ import pprint as pp
 
 conn = http.client.HTTPSConnection("internal-apigw.central.arubanetworks.com")
 payload = ''
+#change the below access_token
 headers = {
-  'Authorization': 'Bearer rWp0OLrJAvR07EJkoy2wxDcxNTPjUGar'
+  'Authorization': '<access_token>'
 }
 conn.request("GET", "/monitoring/v1/aps", payload, headers)
 res = conn.getresponse()
@@ -26,7 +27,6 @@ df['dot11g_radio_disable']=""
 df['usb_port_disable']=""
 df['zonename']=""
 ap_count=int(pd.DataFrame(data_json)["count"][0])
-print(type(ap_count))
 for i in df.index:
  df.at[i,'name']=df.at[i,'site']+'-AP'+df.at[i,'model']+"-"+str(i)
 df=df.rename(columns={"serial": "serial_number", "name": "hostname"})
